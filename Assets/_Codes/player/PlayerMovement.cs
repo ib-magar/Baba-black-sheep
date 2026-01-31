@@ -188,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerCollider == null)
         {
-            Debug.LogWarning("PlayerMovement: No collider assigned, movement allowed by default.");
+            //Debug.LogWarning("PlayerMovement: No collider assigned, movement allowed by default.");
             return true;
         }
 
@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.BoxCast(raycastStart, halfExtents, direction.normalized,
             out hit, Quaternion.identity, gridSize, obstacleLayer))
         {
-            Debug.Log($"Cannot move: Obstacle detected - {hit.collider.name}");
+            //Debug.Log($"Cannot move: Obstacle detected - {hit.collider.name}");
             return false;
         }
 
@@ -233,11 +233,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (canMove)
         {
-            Debug.Log($"Block {blockObject.name} allows movement");
+            //Debug.Log($"Block {blockObject.name} allows movement");
         }
         else
         {
-            Debug.Log($"Block {blockObject.name} blocks movement");
+            //Debug.Log($"Block {blockObject.name} blocks movement");
         }
 
         return canMove;

@@ -17,3 +17,11 @@ public struct InteractionData
     }
 }
 
+/*public enum MaskType
+{
+    Default,
+    Mask1,
+    Mask2,
+    Mask3,
+    Mask4
+}*/

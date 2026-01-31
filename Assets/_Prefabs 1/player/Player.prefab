@@ -116,6 +116,69 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 119720766375597873}
+  - {fileID: 4422156040230156106}
+  m_Father: {fileID: 1957956095951181966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6859935729235864490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4422156040230156106}
+  m_Layer: 7
+  m_Name: masks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4422156040230156106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6859935729235864490}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2008589232292385117}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7758263353599903182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715482815807713220}
+  m_Layer: 0
+  m_Name: MaskVisuals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &715482815807713220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758263353599903182}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 1957956095951181966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7768501933178064342
@@ -131,6 +194,8 @@ GameObject:
   - component: {fileID: 61078797115574527}
   - component: {fileID: 1672768306366338217}
   - component: {fileID: 3717214304405762570}
+  - component: {fileID: 3074952263852753166}
+  - component: {fileID: 5815784350103406339}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -152,6 +217,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2008589232292385117}
+  - {fileID: 715482815807713220}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &125894372525474975
@@ -255,6 +321,9 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 1
   inputDeadzone: 0.1
   playerCollider: {fileID: 125894372525474975}
   visualTransform: {fileID: 2008589232292385117}
@@ -285,3 +354,40 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3074952263852753166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768501933178064342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59b0517a327c154d9ec3f750436d4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maskStack: 
+  initialMasks: 000000000200000003000000
+  currentTopMask: 0
+  maskCount: 0
+  debugAddMask: 1
+  debugRemoveMask: 1
+--- !u!114 &5815784350103406339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768501933178064342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3404c591101712d4db4f7a27dd420133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMask: {fileID: 3074952263852753166}
+  maskData: {fileID: 11400000, guid: 2040db8faa7bb3f4d91c2ca53f2b49a5, type: 2}
+  maskParent: {fileID: 4422156040230156106}
+  positionOffset: {x: 0, y: 0.35, z: 0}
+  scaleIncrement: 0.1
+  maxScale: 2
+  currentVisualStack: 
