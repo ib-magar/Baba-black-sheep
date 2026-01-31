@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        Physics.queriesHitTriggers = true;
         playerInput = GetComponent<PlayerInput>();
         if (playerInput == null)
         {
@@ -214,17 +215,6 @@ public class PlayerMovement : MonoBehaviour
             return TryInteractWithBlock(direction, targetPos, block);
         }
 
-      /*  // Check for blocks
-        RaycastHit blockHit;
-        if (Physics.BoxCast(raycastStart, halfExtents, direction.normalized,
-            out blockHit, Quaternion.identity, gridSize))
-        {
-            Debug.Log($"Block detected: {blockHit.collider.name}");
-
-            // Try to interact with the block
-            return TryInteractWithBlock(direction, targetPos, blockHit.collider.gameObject);
-        }
-*/
         return true;
     }
 
