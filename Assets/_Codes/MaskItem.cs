@@ -1,6 +1,8 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
+using DG.Tweening;
 public class MaskItem : MonoBehaviour
 {
     [Header("Mask Properties")]
@@ -63,6 +65,15 @@ public class MaskItem : MonoBehaviour
         Debug.Log($"MaskItem initialized: {maskType} (Order: {orderIndex})");
     }
 
+    public Vector3 initialOffset= new Vector3(0,1,0);
+    IEnumerator Start()
+    {
+        yield return new WaitForSeconds(.05f);
+        Transform mask = transform.GetChild(0);
+        Vector3 targetPos = mask.position + initialOffset;
+        mask.DOMove(targetPos, .15f);
+    }
+
     [Button("Re-equip Mask")]
     [EnableIf("@canBeReequipped && playerMask != null")]
     public bool ReequipMask()
@@ -78,9 +89,21 @@ public class MaskItem : MonoBehaviour
             Debug.LogWarning($"Cannot re-equip {maskType}: PlayerMask reference not found");
             return false;
         }
+
+        StartCoroutine(AddMask());
+        IEnumerator AddMask()
+        {
+            yield return new WaitForSeconds(.05f);
+            Transform mask = transform.GetChild(0);
+            Vector3 targetPos = mask.position - initialOffset;
+            mask.DOMove(targetPos, .15f).OnComplete(() =>
+            {
+                
+            });
+                        
+        }
         
         bool success = playerMask.EquipMaskFromItem(maskType);
-        
         if (success)
         {
             Debug.Log($"Re-equipped {maskType}");
@@ -93,6 +116,7 @@ public class MaskItem : MonoBehaviour
         Debug.LogWarning($"Failed to re-equip {maskType}");
         return false;
     }
+    
 
     [Button("Print Item Info")]
     public void PrintItemInfo()

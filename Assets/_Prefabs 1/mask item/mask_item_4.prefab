@@ -129,6 +129,7 @@ MonoBehaviour:
   canBeReequipped: 1
   playerMask: {fileID: 0}
   visualTransform: {fileID: 3043285996313293314}
+  initialOffset: {x: 0, y: 1, z: 0}
 --- !u!1001 &620471755244771386
 PrefabInstance:
   m_ObjectHideFlags: 0
