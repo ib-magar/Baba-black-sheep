@@ -95,6 +95,15 @@ public class MaskItem : MonoBehaviour
     {
         // Wait a frame for physics to settle
         yield return null;
+
+        if (playerMask == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                playerMask = player.GetComponent<PlayerMask>();
+            }
+        }
         
         // Play drop animation
         if (visualTransform != null)

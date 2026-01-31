@@ -77,11 +77,23 @@ public class Trigger : MonoBehaviour
             // Only deactivate when all colliders have exited
             if (currentColliders.Count == 0 && !isOneTimeTrigger)
             {
+            if (checkColliders())
+            return;
                 DeactivateTrigger();
             }
         }
+        
+        
     }
 
+    public bool checkColliders()
+    {
+        if (Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, .5f, triggerLayers,
+                QueryTriggerInteraction.Collide))
+            return true;
+
+        return false;
+    }
     private void ActivateTrigger()
     {
         if (isPressed) return;

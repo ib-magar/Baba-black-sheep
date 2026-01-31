@@ -125,8 +125,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMovementPerformed(InputAction.CallbackContext context)
     {
         currentInput = context.ReadValue<Vector2>();
-
-        if (currentInput.magnitude > inputDeadzone)
+ if (currentInput.magnitude > inputDeadzone)
         {
             inputActive = true;
             lastValidInput = currentInput.normalized;

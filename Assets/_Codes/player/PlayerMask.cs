@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using UnityEngine.InputSystem;
 
 public enum MaskType
 {
@@ -87,6 +88,14 @@ public class PlayerMask : MonoBehaviour
         return true;
     }
 
+    public void OnReleaseMaskInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            RemoveOuterMask();
+        }
+    }
+    
     [Button("Remove Outer Mask", ButtonSizes.Medium)]
     [HorizontalGroup("MaskOperations")]
     [EnableIf("@CanRemoveMask()")]
