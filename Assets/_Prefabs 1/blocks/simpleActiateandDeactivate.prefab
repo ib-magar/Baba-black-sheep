@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3311972123413121886}
-  - component: {fileID: 6136230740486776279}
   - component: {fileID: 8397897374291387678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: simpleActiateandDeactivate
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,27 +33,6 @@ Transform:
   - {fileID: 1019636959238018126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6136230740486776279
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005227094221538828}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8397897374291387678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +62,7 @@ GameObject:
   - component: {fileID: 1638361383997936263}
   - component: {fileID: 4954784257297171293}
   - component: {fileID: 4156182157960800830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone.084 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +148,7 @@ GameObject:
   - component: {fileID: 4360011903311279618}
   - component: {fileID: 4974076478483677761}
   - component: {fileID: 2588210631886384706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone.084 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +234,7 @@ GameObject:
   - component: {fileID: 2079308804942424552}
   - component: {fileID: 4953926061225508235}
   - component: {fileID: 3997404302276181286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone.084 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +320,7 @@ GameObject:
   - component: {fileID: 7160929390674338596}
   - component: {fileID: 2635366622874712373}
   - component: {fileID: 8575559897566153421}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone.084 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +406,7 @@ GameObject:
   - component: {fileID: 4444742158327269783}
   - component: {fileID: 8664121798093314839}
   - component: {fileID: 4061663340095773604}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone.084
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,6 +494,10 @@ PrefabInstance:
       value: simpleActiateandDeactivate (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2534154094881965846, guid: 96d6de48430293248a77501f6790c59e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2534154094881965846, guid: 96d6de48430293248a77501f6790c59e, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -584,7 +566,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3714869972044585931, guid: 96d6de48430293248a77501f6790c59e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4360011903311279618}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2534154094881965846, guid: 96d6de48430293248a77501f6790c59e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2008833562677845594}
   m_SourcePrefab: {fileID: 100100000, guid: 96d6de48430293248a77501f6790c59e, type: 3}
 --- !u!4 &1019636959238018126 stripped
 Transform:
@@ -596,3 +581,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2534154094881965846, guid: 96d6de48430293248a77501f6790c59e, type: 3}
   m_PrefabInstance: {fileID: 4443826770135109509}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &2008833562677845594
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2197962631276185747}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
