@@ -2,6 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+// Struct to hold visual data for masks
+public struct MaskVisualData
+{
+    public Vector3 localPosition;
+    public Vector3 localScale;
+    public int orderIndex;
+    public MaskType maskType;
+}
+
 public class MaskVisualController : MonoBehaviour
 {
     [Header("References")]
@@ -24,9 +33,22 @@ public class MaskVisualController : MonoBehaviour
     [SerializeField, Tooltip("Maximum scale for masks (to prevent them from becoming too large)")]
     private float maxScale = 2.0f;
 
+    [Header("Drop Settings")]
+    [SerializeField, Tooltip("Should dropped items maintain their visual scale?")]
+    private bool maintainVisualScaleOnDrop = true;
+    
+    [SerializeField, Tooltip("Offset from player position where mask items spawn")]
+    private Vector3 dropSpawnOffset = new Vector3(0, 0.5f, 1f);
+    
+    [SerializeField, Tooltip("Local position offset for the visual child in dropped items")]
+    private Vector3 dropVisualLocalOffset = Vector3.zero;
+
     [Header("Debug")]
     [SerializeField, ReadOnly]
     private Dictionary<MaskType, GameObject> activeMaskVisuals = new Dictionary<MaskType, GameObject>();
+    
+    [SerializeField, ReadOnly]
+    private Dictionary<MaskType, MaskVisualData> maskVisualDataCache = new Dictionary<MaskType, MaskVisualData>();
     
     [SerializeField, ReadOnly]
     private List<MaskType> currentVisualStack = new List<MaskType>();
@@ -35,7 +57,8 @@ public class MaskVisualController : MonoBehaviour
     {
         if (playerMask != null)
         {
-            playerMask.OnMaskStackUpdated += UpdateVisuals;
+            playerMask.OnMaskAdded += OnMaskAdded;
+            playerMask.OnMaskRemoved += OnMaskRemoved;
         }
     }
 
@@ -43,7 +66,8 @@ public class MaskVisualController : MonoBehaviour
     {
         if (playerMask != null)
         {
-            playerMask.OnMaskStackUpdated -= UpdateVisuals;
+            playerMask.OnMaskAdded -= OnMaskAdded;
+            playerMask.OnMaskRemoved -= OnMaskRemoved;
         }
     }
 
@@ -64,6 +88,17 @@ public class MaskVisualController : MonoBehaviour
         }
     }
 
+    private void OnMaskAdded(MaskType maskType)
+    {
+        UpdateVisuals();
+    }
+
+    private void OnMaskRemoved(MaskType maskType)
+    {
+        // Visual destruction is handled in UpdateVisuals
+        UpdateVisuals();
+    }
+
     [Button("Update Visuals")]
     public void UpdateVisuals()
     {
@@ -80,6 +115,7 @@ public class MaskVisualController : MonoBehaviour
         {
             ClearAllVisuals();
             currentVisualStack = new List<MaskType>(newStack);
+            maskVisualDataCache.Clear();
             return;
         }
         
@@ -101,6 +137,7 @@ public class MaskVisualController : MonoBehaviour
         foreach (var maskType in masksToRemove)
         {
             activeMaskVisuals.Remove(maskType);
+            maskVisualDataCache.Remove(maskType);
         }
 
         // Count how many non-default masks we have (for scale calculation)
@@ -112,6 +149,9 @@ public class MaskVisualController : MonoBehaviour
                 nonDefaultMaskCount++;
             }
         }
+        
+        // Clear cache and recalculate
+        maskVisualDataCache.Clear();
         
         // Update positions and scales for all masks (skip Default mask)
         int visualLayerIndex = 0;
@@ -128,23 +168,102 @@ public class MaskVisualController : MonoBehaviour
             if (maskVisual != null)
             {
                 // Calculate position (first non-default mask at base, subsequent masks offset)
-                Vector3 position = positionOffset * visualLayerIndex;
-                maskVisual.transform.localPosition = position;
+                Vector3 localPosition = positionOffset * visualLayerIndex;
+                maskVisual.transform.localPosition = localPosition;
                 
                 // Calculate scale: Start at 1.0, increase with each additional mask
                 // visualLayerIndex starts at 0 for the first non-default mask
                 float scaleFactor = 1.0f + (scaleIncrement * visualLayerIndex);
                 scaleFactor = Mathf.Min(scaleFactor, maxScale); // Clamp to max scale
-                maskVisual.transform.localScale = Vector3.one * scaleFactor;
+                Vector3 localScale = Vector3.one * scaleFactor;
+                maskVisual.transform.localScale = localScale;
                 
                 // Set order in hierarchy (bottom mask first, top mask last for proper rendering)
                 maskVisual.transform.SetSiblingIndex(visualLayerIndex);
+                
+                // Cache the visual data
+                MaskVisualData visualData = new MaskVisualData
+                {
+                    localPosition = localPosition,
+                    localScale = localScale,
+                    orderIndex = visualLayerIndex,
+                    maskType = maskType
+                };
+                maskVisualDataCache[maskType] = visualData;
                 
                 visualLayerIndex++;
             }
         }
 
         currentVisualStack = new List<MaskType>(newStack);
+    }
+
+    public MaskVisualData GetMaskVisualData(MaskType maskType)
+    {
+        if (maskVisualDataCache.TryGetValue(maskType, out MaskVisualData data))
+        {
+            return data;
+        }
+        
+        // Return default data if not found in cache
+        return new MaskVisualData
+        {
+            localPosition = Vector3.zero,
+            localScale = Vector3.one,
+            orderIndex = 0,
+            maskType = maskType
+        };
+    }
+
+    public void DropMaskItem(MaskType maskType, MaskVisualData visualData, Vector3 spawnPosition)
+    {
+        GameObject maskItemPrefab = maskData.GetMaskItem(maskType);
+        if (maskItemPrefab == null)
+        {
+            Debug.LogWarning($"No mask item prefab found for {maskType}");
+            return;
+        }
+
+        // Calculate spawn position with offset
+        //Vector3 finalSpawnPosition = spawnPosition + dropSpawnOffset;
+        Vector3 finalSpawnPosition = transform.position;
+        
+        // Instantiate the mask item at world position with no rotation (identity)
+        GameObject maskItemObj = Instantiate(maskItemPrefab, finalSpawnPosition, Quaternion.identity);
+        maskItemObj.name = $"{maskData.GetName(maskType)}_Item";
+        
+        // Get or add the MaskItem component
+        MaskItem maskItem = maskItemObj.GetComponent<MaskItem>();
+        if (maskItem == null)
+        {
+            maskItem = maskItemObj.AddComponent<MaskItem>();
+        }
+        
+        // Initialize the mask item with visual data
+        maskItem.Initialize(maskType, visualData);
+        
+        // Apply visual data ONLY to the first child, NOT to the root object
+        if (maskItemObj.transform.childCount > 0)
+        {
+            Transform visualChild = maskItemObj.transform.GetChild(0);
+            
+            if (maintainVisualScaleOnDrop)
+            {
+                // Apply the cached local position and scale to the child
+                // Add any additional offset for dropped items
+                visualChild.localPosition = visualData.localPosition + dropVisualLocalOffset;
+                visualChild.localScale = visualData.localScale;
+                
+                // Keep the root object at default transform (position set above, scale = 1)
+                maskItemObj.transform.localScale = Vector3.one;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Mask item prefab for {maskType} has no child objects. Visual data cannot be applied.");
+        }
+        
+        Debug.Log($"Dropped {maskType} mask item at {finalSpawnPosition}");
     }
 
     private GameObject GetOrCreateMaskVisual(MaskType maskType)
@@ -173,6 +292,7 @@ public class MaskVisualController : MonoBehaviour
         // Reset transform (position and scale will be set by UpdateVisuals)
         newVisual.transform.localPosition = Vector3.zero;
         newVisual.transform.localRotation = Quaternion.identity;
+        newVisual.transform.localScale = Vector3.one;
         
         activeMaskVisuals[maskType] = newVisual;
         return newVisual;
@@ -189,6 +309,7 @@ public class MaskVisualController : MonoBehaviour
             }
         }
         activeMaskVisuals.Clear();
+        maskVisualDataCache.Clear();
         currentVisualStack.Clear();
     }
 
@@ -208,33 +329,40 @@ public class MaskVisualController : MonoBehaviour
         Debug.Log(debugString);
     }
 
-    [Button("Test Scale Progression")]
-    private void TestScaleProgression()
+    [Button("Print Visual Data Cache")]
+    private void PrintVisualDataCache()
     {
-        List<MaskType> testStack = playerMask?.GetMaskStack();
-        if (testStack == null)
+        string debugString = "Visual Data Cache:\n";
+        if (maskVisualDataCache.Count == 0)
         {
-            Debug.Log("No player mask found");
+            debugString += "Cache is empty\n";
+        }
+        
+        foreach (var kvp in maskVisualDataCache)
+        {
+            debugString += $"{kvp.Key}: LocalPos={kvp.Value.localPosition}, LocalScale={kvp.Value.localScale}, Order={kvp.Value.orderIndex}\n";
+        }
+        Debug.Log(debugString);
+    }
+
+    [Button("Test Drop at Current Position")]
+    private void TestDropCurrentMask()
+    {
+        if (playerMask == null || playerMask.GetMaskCount() <= 1)
+        {
+            Debug.Log("Cannot test drop: Not enough masks or player mask not found");
             return;
         }
-        
-        int nonDefaultCount = 0;
-        foreach (var mask in testStack)
+
+        MaskType currentTopMask = playerMask.GetCurrentMask();
+        if (currentTopMask == MaskType.Default)
         {
-            if (mask != MaskType.Default) nonDefaultCount++;
+            Debug.Log("Cannot drop default mask");
+            return;
         }
-        
-        Debug.Log($"Stack Analysis:\n" +
-                 $"Total Masks: {testStack.Count}\n" +
-                 $"Non-Default Masks: {nonDefaultCount}\n" +
-                 $"Scale Progression:");
-        
-        for (int i = 0; i < nonDefaultCount; i++)
-        {
-            float scale = 1.0f + (scaleIncrement * i);
-            scale = Mathf.Min(scale, maxScale);
-            Debug.Log($"  Mask {i + 1}: Scale = {scale:F2}");
-        }
+
+        MaskVisualData visualData = GetMaskVisualData(currentTopMask);
+        DropMaskItem(currentTopMask, visualData, transform.position);
     }
 
     private void OnValidate()

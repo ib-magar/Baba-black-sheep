@@ -15,7 +15,8 @@ public enum MaskType
 public class PlayerMask : MonoBehaviour
 {
     // Event for mask stack changes
-    public event Action OnMaskStackUpdated;
+    public event Action<MaskType> OnMaskAdded;
+    public event Action<MaskType> OnMaskRemoved;
     
     [Header("Mask Stack Configuration")]
     [SerializeField, ReadOnly]
@@ -24,6 +25,13 @@ public class PlayerMask : MonoBehaviour
     [Header("Initial Masks")]
     [SerializeField, Tooltip("Masks that are added at the start")]
     private List<MaskType> initialMasks = new List<MaskType> { MaskType.Default };
+
+    [Header("Mask Drop Settings")]
+    [SerializeField, Tooltip("Offset from player when dropping mask")]
+    private Vector3 dropOffset = new Vector3(0, 0.5f, 1f);
+    
+    [SerializeField, Tooltip("Reference to MaskVisualController for getting visual data")]
+    private MaskVisualController maskVisualController;
 
     [Header("Debug Information")]
     [SerializeField, ReadOnly, LabelText("Current Mask (Outermost)")]
@@ -57,7 +65,7 @@ public class PlayerMask : MonoBehaviour
         }
         
         UpdateDebugInfo();
-        OnMaskStackUpdated?.Invoke();
+        // Don't invoke events on initialization
     }
 
     [Button("Add Mask", ButtonSizes.Medium)]
@@ -73,7 +81,7 @@ public class PlayerMask : MonoBehaviour
 
         maskStack.Add(maskToAdd);
         UpdateDebugInfo();
-        OnMaskStackUpdated?.Invoke();
+        OnMaskAdded?.Invoke(maskToAdd);
         Debug.Log($"Added mask: {maskToAdd}. Total masks: {maskStack.Count}");
         PrintCurrentMask();
         return true;
@@ -93,10 +101,38 @@ public class PlayerMask : MonoBehaviour
         MaskType removedMask = maskStack[maskStack.Count - 1];
         maskStack.RemoveAt(maskStack.Count - 1);
         UpdateDebugInfo();
-        OnMaskStackUpdated?.Invoke();
+        
+        // Drop the mask item before invoking the removal event
+        DropMaskItem(removedMask);
+        
+        OnMaskRemoved?.Invoke(removedMask);
         Debug.Log($"Removed outer mask: {removedMask}. Remaining masks: {maskStack.Count}");
         PrintCurrentMask();
         return true;
+    }
+
+    private void DropMaskItem(MaskType maskType)
+    {
+        if (maskVisualController == null)
+        {
+            maskVisualController = GetComponent<MaskVisualController>();
+            if (maskVisualController == null)
+            {
+                Debug.LogError("MaskVisualController not found! Cannot drop mask item.");
+                return;
+            }
+        }
+
+        // Get the visual data for the removed mask
+        MaskVisualData visualData = maskVisualController.GetMaskVisualData(maskType);
+        
+        // Drop the mask item
+        maskVisualController.DropMaskItem(maskType, visualData, transform.position + dropOffset);
+    }
+
+    public bool EquipMaskFromItem(MaskType maskType)
+    {
+        return AddMask(maskType);
     }
 
     private bool CanRemoveMask()

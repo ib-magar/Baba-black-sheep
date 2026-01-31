@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6091305787605761343}
   - component: {fileID: 6928943317707997763}
   - component: {fileID: 1262866203542532437}
+  - component: {fileID: 7659930345091769968}
   m_Layer: 0
   m_Name: mask_item_2
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eae081b0dc0ecdb40bab101088aca5f3, type: 2}
+  - {fileID: 2100000, guid: 2d1dea3764bfe8e48b7fde5b6508cd8e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,12 +104,31 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7659930345091769968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677665578831397909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2a7c7aa1c761f43a563861325a58f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maskType: 2
+  orderIndex: 0
+  visualLocalPosition: {x: 0, y: 0, z: 0}
+  visualLocalScale: {x: 0, y: 0, z: 0}
+  canBeReequipped: 1
+  playerMask: {fileID: 0}
+  visualTransform: {fileID: 7900871078676137712}
 --- !u!1001 &5693183083680738504
 PrefabInstance:
   m_ObjectHideFlags: 0
