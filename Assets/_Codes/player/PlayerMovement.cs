@@ -205,30 +205,31 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
 
-        // Check for blocks
+
+        RaycastHit rayHit;
+
+        if(Physics.Raycast(raycastStart,direction.normalized,out rayHit, gridSize))
+        {
+            if(rayHit.collider.gameObject.TryGetComponent<InteractableBlock>(out InteractableBlock block))
+            return TryInteractWithBlock(direction, targetPos, block);
+        }
+
+      /*  // Check for blocks
         RaycastHit blockHit;
         if (Physics.BoxCast(raycastStart, halfExtents, direction.normalized,
-            out blockHit, Quaternion.identity, gridSize, blockLayer))
+            out blockHit, Quaternion.identity, gridSize))
         {
             Debug.Log($"Block detected: {blockHit.collider.name}");
 
             // Try to interact with the block
             return TryInteractWithBlock(direction, targetPos, blockHit.collider.gameObject);
         }
-
+*/
         return true;
     }
 
-    private bool TryInteractWithBlock(Vector3 direction, Vector3 playerTargetPos, GameObject blockObject)
+    private bool TryInteractWithBlock(Vector3 direction, Vector3 playerTargetPos, InteractableBlock blockObject)
     {
-        InteractableBlock interactableBlock = blockObject.GetComponent<InteractableBlock>();
-
-        if (interactableBlock == null)
-        {
-            Debug.Log($"Block {blockObject.name} has no InteractableBlock component");
-            return false;
-        }
-
         // Create interaction data
         InteractionData interactionData = new InteractionData(
             direction,
@@ -238,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
         );
 
         // Ask the block if the player can move
-        bool canMove = interactableBlock.CanPlayerMoveHere(interactionData);
+        bool canMove = blockObject.CanPlayerMoveHere(interactionData);
 
         if (canMove)
         {

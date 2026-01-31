@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class MovableBlock : InteractableBlock
@@ -25,6 +26,8 @@ public class MovableBlock : InteractableBlock
 
     private void Awake()
     {
+        Physics.queriesHitTriggers = false;
+
         // Get collider
         blockCollider = GetComponent<Collider>();
         if (blockCollider == null)
@@ -55,6 +58,7 @@ public class MovableBlock : InteractableBlock
             return true;
         }
 
+
         return false;
     }
 
@@ -82,21 +86,18 @@ public class MovableBlock : InteractableBlock
         // Calculate collider bounds at target position
         Vector3 colliderCenter = position + (blockCollider.bounds.center - transform.position);
         Vector3 halfExtents = blockCollider.bounds.extents * 0.9f; // Slightly smaller to avoid self-collision
-
-        // Check for any collider in the target position
-        Collider[] colliders = Physics.OverlapBox(colliderCenter, halfExtents, Quaternion.identity, collisionLayers);
-
-        foreach (Collider col in colliders)
+        Debug.DrawLine(transform.position, colliderCenter, Color.red, 2f);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position,(colliderCenter-transform.position).normalized,out hit,gridSize))
         {
-            // Skip self
-            if (col.gameObject == gameObject) continue;
-
-            Debug.Log($"MovableBlock {name}: Found collider {col.name} at target position");
             return true;
         }
 
         return false;
     }
+
+    [Button("move left")]
+    void moveleft()=>StartBlockMovement(Vector3.left * gridSize);
 
     private void StartBlockMovement(Vector3 direction)
     {
