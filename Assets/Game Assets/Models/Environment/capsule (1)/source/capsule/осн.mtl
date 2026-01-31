@@ -1,0 +1,219 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.1.31193554)
+
+newmtl Capsul_w
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl balka
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl batons
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl blok
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl detal_1
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl detal_2
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl komp
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl krepej_kompa
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl krepeji_trub
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl krepeji_verh
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl krepeji_verh_1
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl kreplenie
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl krutelka
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl lamps
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl lamps_light
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl monik_pribor
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl osn_down
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl osn_up
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl osnovanie
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl perehod_k_kompy
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl petli
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl podushki
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl shitok
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
+newmtl trubi
+kd 0.8 0.8 0.8
+ka 1 1 1
+ks 0.5 0.5 0.5
+ke 0 0 0
+d 1
+Ns 900
+illum 2
+
