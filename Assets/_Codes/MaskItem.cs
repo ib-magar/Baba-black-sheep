@@ -79,7 +79,7 @@ public class MaskItem : MonoBehaviour
         // Try to find player mask if not assigned
         if (playerMask == null)
         {
-            playerMask = FindObjectOfType<PlayerMask>();
+            playerMask = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMask>();
         }
         
         // Set up collider if not assigned
@@ -98,11 +98,7 @@ public class MaskItem : MonoBehaviour
 
         if (playerMask == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                playerMask = player.GetComponent<PlayerMask>();
-            }
+            playerMask = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMask>();
         }
         
         // Play drop animation
