@@ -11,7 +11,7 @@ public class MaskDataSO : ScriptableObject
     public GameObject GetPrefab(MaskType maskType)
     {
         // Default mask should not have a prefab
-        if (maskType == MaskType.Default)
+        if (maskType == MaskType.Wolf)
             return null;
             
         foreach (var definition in maskDefinitions)
@@ -28,7 +28,7 @@ public class MaskDataSO : ScriptableObject
     public GameObject GetMaskItem(MaskType maskType)
     {
         // Default mask should not have a mask item
-        if (maskType == MaskType.Default)
+        if (maskType == MaskType.Wolf)
             return null;
             
         foreach (var definition in maskDefinitions)
@@ -62,7 +62,7 @@ public class MaskDataSO : ScriptableObject
     // Helper method to check if a mask type should have a visual
     public bool ShouldHaveVisual(MaskType maskType)
     {
-        return maskType != MaskType.Default && GetPrefab(maskType) != null;
+        return maskType != MaskType.Wolf && GetPrefab(maskType) != null;
     }
 
     public MaskMatches[] Matches;

@@ -6,11 +6,15 @@ using UnityEngine.InputSystem;
 
 public enum MaskType
 {
-    Default,
-    Mask1,
-    Mask2,
-    Mask3,
-    Mask4
+    Wolf,
+    Sheep,
+    Pig,
+    Rabbit,
+    Dog,
+    Stone,
+    Paper,
+    Sciscor,
+    Generic,
 }
 
 public class PlayerMask : MonoBehaviour
@@ -25,7 +29,7 @@ public class PlayerMask : MonoBehaviour
 
     [Header("Initial Masks")]
     [SerializeField, Tooltip("Masks that are added at the start")]
-    private List<MaskType> initialMasks = new List<MaskType> { MaskType.Default };
+    private List<MaskType> initialMasks = new List<MaskType> { MaskType.Wolf };
 
     [Header("Mask Drop Settings")]
     [SerializeField, Tooltip("Offset from player when dropping mask")]
@@ -36,7 +40,7 @@ public class PlayerMask : MonoBehaviour
 
     [Header("Debug Information")]
     [SerializeField, ReadOnly, LabelText("Current Mask (Outermost)")]
-    private MaskType currentTopMask = MaskType.Default;
+    private MaskType currentTopMask = MaskType.Wolf;
     
     [SerializeField, ReadOnly, LabelText("Mask Count")]
     private int maskCount = 0;
@@ -65,7 +69,7 @@ public class PlayerMask : MonoBehaviour
         // Ensure at least one mask exists
         if (maskStack.Count == 0)
         {
-            maskStack.Add(MaskType.Default);
+            maskStack.Add(MaskType.Wolf);
         }
         
         UpdateDebugInfo();
@@ -238,17 +242,17 @@ public class PlayerMask : MonoBehaviour
         }
         else
         {
-            currentTopMask = MaskType.Default;
+            currentTopMask = MaskType.Wolf;
         }
         
         maskCount = maskStack.Count;
     }
 
     [SerializeField, BoxGroup("Debug/Quick Actions"), HideLabel, EnumToggleButtons]
-    private MaskType debugAddMask = MaskType.Mask1;
+    private MaskType debugAddMask = MaskType.Sheep;
     
     [SerializeField, BoxGroup("Debug/Quick Actions"), HideLabel, EnumToggleButtons]
-    private MaskType debugRemoveMask = MaskType.Mask1;
+    private MaskType debugRemoveMask = MaskType.Sheep;
 
     [Button("Debug Add Selected", ButtonSizes.Medium)]
     [BoxGroup("Debug/Quick Actions")]

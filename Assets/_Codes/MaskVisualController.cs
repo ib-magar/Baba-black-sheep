@@ -112,7 +112,7 @@ public class MaskVisualController : MonoBehaviour
         List<MaskType> newStack = playerMask.GetMaskStack();
         
         // Skip if stack is empty or only has default mask
-        if (newStack.Count == 0 || (newStack.Count == 1 && newStack[0] == MaskType.Default))
+        if (newStack.Count == 0 || (newStack.Count == 1 && newStack[0] == MaskType.Wolf))
         {
             ClearAllVisuals();
             currentVisualStack = new List<MaskType>(newStack);
@@ -125,7 +125,7 @@ public class MaskVisualController : MonoBehaviour
         List<MaskType> masksToRemove = new List<MaskType>();
         foreach (var kvp in activeMaskVisuals)
         {
-            if (!newStack.Contains(kvp.Key) || kvp.Key == MaskType.Default)
+            if (!newStack.Contains(kvp.Key) || kvp.Key == MaskType.Wolf)
             {
                 if (kvp.Value != null)
                 {
@@ -145,7 +145,7 @@ public class MaskVisualController : MonoBehaviour
         int nonDefaultMaskCount = 0;
         foreach (var maskType in newStack)
         {
-            if (maskType != MaskType.Default)
+            if (maskType != MaskType.Wolf)
             {
                 nonDefaultMaskCount++;
             }
@@ -161,7 +161,7 @@ public class MaskVisualController : MonoBehaviour
             MaskType maskType = newStack[i];
             
             // Skip Default mask - it doesn't get a visual
-            if (maskType == MaskType.Default)
+            if (maskType == MaskType.Wolf)
                 continue;
                 
             GameObject maskVisual = GetOrCreateMaskVisual(maskType);
@@ -270,7 +270,7 @@ public class MaskVisualController : MonoBehaviour
     private GameObject GetOrCreateMaskVisual(MaskType maskType)
     {
         // Don't create visual for Default mask
-        if (maskType == MaskType.Default)
+        if (maskType == MaskType.Wolf)
             return null;
 
         // Return existing visual if we have it
@@ -356,7 +356,7 @@ public class MaskVisualController : MonoBehaviour
         }
 
         MaskType currentTopMask = playerMask.GetCurrentMask();
-        if (currentTopMask == MaskType.Default)
+        if (currentTopMask == MaskType.Wolf)
         {
             Debug.Log("Cannot drop default mask");
             return;

@@ -37,4 +37,18 @@ MonoBehaviour:
   - mask: 0
     matches: 
   - mask: 1
-    matches: 0200000004000000
+    matches: 0100000008000000
+  - mask: 2
+    matches: 0200000008000000
+  - mask: 3
+    matches: 0300000008000000
+  - mask: 4
+    matches: 0400000008000000
+  - mask: 5
+    matches: 06000000
+  - mask: 6
+    matches: 07000000
+  - mask: 7
+    matches: 05000000
+  - mask: 8
+    matches: 08000000
