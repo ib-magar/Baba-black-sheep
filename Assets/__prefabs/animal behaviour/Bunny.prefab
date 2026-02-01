@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3701479224697077141, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
+      propertyPath: diePartice
+      value: 
+      objectReference: {fileID: 7183954015559465847, guid: 2536fa06b746b6e429cb59c9d3cd69a7, type: 3}
     - target: {fileID: 7282776727670043677, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
       propertyPath: m_Name
       value: Animal (3)

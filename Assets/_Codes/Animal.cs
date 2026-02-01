@@ -45,4 +45,11 @@ public class Animal : InteractableBlock
         yield return new WaitForSeconds(deathDelay);
         Destroy(gameObject);
     }
+
+    public GameObject diePartice;
+    private void OnDestroy()
+    {
+        //Instantiate(Resources.Load<GameObject>("__prefabs/Resources/smoke"),transform.position,Quaternion.identity);
+        Instantiate(diePartice,transform.position,Quaternion.identity);
+    }
 }

@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
         sheepcounter = GetComponent<SheepCounter>();
         sheepcounter.OnAllAnimalsEaten.AddListener(OnAllAnimalsEaten);
         
-        totalScenes=SceneManager.sceneCount;
+        totalScenes=6;
         currentScene=SceneManager.GetActiveScene().buildIndex;
     }
 
