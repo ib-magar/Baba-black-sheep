@@ -17,22 +17,27 @@ MonoBehaviour:
     displayName: Wolf
     prefab: {fileID: 0}
     maskItem: {fileID: 0}
+    GatemaskItem: {fileID: 0}
   - maskType: 1
     displayName: Mask 1
     prefab: {fileID: 3284987798622951847, guid: 4e970502eabe4aa4a89ee452bdc9d253, type: 3}
     maskItem: {fileID: 780602110472559509, guid: 5f4b6a79faff4bc4e906bbc95be5a5da, type: 3}
+    GatemaskItem: {fileID: 3284987798622951847, guid: 4e970502eabe4aa4a89ee452bdc9d253, type: 3}
   - maskType: 2
     displayName: Mask 2
     prefab: {fileID: 3284987798622951847, guid: f80fe13e33bebd146833dcb720e7d83b, type: 3}
     maskItem: {fileID: 677665578831397909, guid: 84a1c9319ed099941ac2a894f7774022, type: 3}
+    GatemaskItem: {fileID: 3284987798622951847, guid: f80fe13e33bebd146833dcb720e7d83b, type: 3}
   - maskType: 3
     displayName: Mask 3
     prefab: {fileID: 3284987798622951847, guid: 39c5d5fa159444344a3953d3d587196e, type: 3}
     maskItem: {fileID: 1043883457038125202, guid: 263fbfbd5fd63c445ab66213240c3a08, type: 3}
+    GatemaskItem: {fileID: 3284987798622951847, guid: 39c5d5fa159444344a3953d3d587196e, type: 3}
   - maskType: 4
     displayName: Mask 4
     prefab: {fileID: 3284987798622951847, guid: 4e52d43e9b7ed8448ab42174e0281bac, type: 3}
     maskItem: {fileID: 1760662036628861122, guid: f4b8969f47c35ec43968092093142fe9, type: 3}
+    GatemaskItem: {fileID: 3284987798622951847, guid: 4e52d43e9b7ed8448ab42174e0281bac, type: 3}
   Matches:
   - mask: 0
     matches: 

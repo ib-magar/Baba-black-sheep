@@ -41,6 +41,23 @@ public class MaskDataSO : ScriptableObject
         Debug.LogWarning($"No mask item defined for mask type: {maskType}");
         return null;
     }
+    
+    public GameObject getGateMaskItem(MaskType maskType)
+    {
+        // Default mask should not have a mask item
+        if (maskType == MaskType.Wolf)
+            return null;
+            
+        foreach (var definition in maskDefinitions)
+        {
+            if (definition.maskType == maskType)
+            {
+                return definition.GatemaskItem;
+            }
+        }
+        Debug.LogWarning($"No mask item defined for mask type: {maskType}");
+        return null;
+    }
 
     public string GetName(MaskType maskType)
     {
@@ -88,6 +105,7 @@ public struct MaskDefinition
     public string displayName;
     public GameObject prefab;
     public GameObject maskItem;
+    public GameObject GatemaskItem;
 }
 
 [System.Serializable]

@@ -26,16 +26,21 @@ public class LevelManager : MonoBehaviour
         int nextSceneCount = currentScene++;
         currentScene%= totalScenes;
 
-        StartCoroutine((LoadSceneWithDelay()));
-        IEnumerator LoadSceneWithDelay()
-        {
-            yield return new WaitForSeconds(sceneLoadDelay);
-            SceneManager.LoadScene(nextSceneCount);
-        }
+        StartCoroutine((LoadSceneWithDelay(currentScene)));
     }
 
+        IEnumerator LoadSceneWithDelay(int scene)
+        {
+            yield return new WaitForSeconds(sceneLoadDelay);
+            SceneManager.LoadScene(scene);
+        }
     private void OnDestroy()
     {
         sheepcounter.OnAllAnimalsEaten.RemoveListener(OnAllAnimalsEaten);
+    }
+
+    public void GotfuckedUp()
+    {
+        StartCoroutine((LoadSceneWithDelay(SceneManager.GetActiveScene().buildIndex)));
     }
 }
