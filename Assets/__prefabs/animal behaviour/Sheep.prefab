@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4630108976532483900}
   m_Layer: 0
-  m_Name: Animal behavior
+  m_Name: Sheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

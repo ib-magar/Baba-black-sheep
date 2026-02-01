@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/in-gamescene/Level_1.unity
     guid: 313459e34a914dd4db89f9838ae27579
   - enabled: 1
+    path: Assets/Scenes/in-gamescene/level_1_b.unity
+    guid: 437d62b393e9c124b9cc6a19c6bfeab3
+  - enabled: 1
+    path: Assets/Scenes/in-gamescene/level_1_c.unity
+    guid: 99b167737bf1e8d47bf19bb1fa0e81c7
+  - enabled: 1
+    path: Assets/Scenes/in-gamescene/level_1_d.unity
+    guid: 0c706549c8a177b44a046a9bca161d81
+  - enabled: 1
     path: Assets/Scenes/in-gamescene/End.unity
     guid: 4687cd812c9d963438f2c21ff124601b
   m_configObjects:

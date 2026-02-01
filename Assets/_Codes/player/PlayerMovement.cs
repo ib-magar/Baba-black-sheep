@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gridSize = 1f;
     [SerializeField] private float jumpHeight = 0.5f;
     [SerializeField] private float moveDuration = 0.3f;
+    [SerializeField] private float rotationSpeed = 10f; // Added rotation speed
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private LayerMask blockLayer;
 
@@ -15,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Collider playerCollider;
-    [SerializeField] private Transform visualTransform;
+    [SerializeField] private Transform visualTransform; // This should be the visual object that rotates
 
     // Movement state
     private bool isMoving = false;
@@ -23,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 visualStartPosition;
     private float moveTimer = 0f;
+
+    // Rotation state
+    private Quaternion targetRotation;
+    private Quaternion startRotation;
+    private bool isRotating = false;
 
     // Input handling
     private Vector2 currentInput;
@@ -34,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 globalBackward = Vector3.back;
     private Vector3 globalRight = Vector3.right;
     private Vector3 globalLeft = Vector3.left;
+
+    // Current facing direction
+    private Vector3 currentFacingDirection = Vector3.forward;
 
     // Input Actions
     private InputAction moveAction;
@@ -80,15 +89,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveAction = playerMap.FindAction("Movement");
-        if (moveAction == null)
+        if (moveAction != null)
+        {
+            playerMap.Enable();
+            moveAction.performed += OnMovementPerformed;
+            moveAction.canceled += OnMovementCanceled;
+        }
+        else
         {
             Debug.LogError("PlayerMovement: 'Movement' action not found in Player action map!");
-            return;
         }
-
-        playerMap.Enable();
-        moveAction.performed += OnMovementPerformed;
-        moveAction.canceled += OnMovementCanceled;
     }
 
     private void OnEnable()
@@ -106,6 +116,10 @@ public class PlayerMovement : MonoBehaviour
         if (visualTransform != null)
         {
             visualStartPosition = visualTransform.localPosition;
+            // Initialize rotation to face forward
+            targetRotation = Quaternion.LookRotation(globalForward);
+            visualTransform.rotation = targetRotation;
+            currentFacingDirection = globalForward;
         }
     }
 
@@ -120,12 +134,19 @@ public class PlayerMovement : MonoBehaviour
         {
             UpdateMovement();
         }
+
+        // Smoothly rotate towards target rotation
+        if (isRotating && visualTransform != null)
+        {
+            UpdateRotation();
+        }
     }
 
     public void OnMovementPerformed(InputAction.CallbackContext context)
     {
         currentInput = context.ReadValue<Vector2>();
- if (currentInput.magnitude > inputDeadzone)
+        
+        if (currentInput.magnitude > inputDeadzone)
         {
             inputActive = true;
             lastValidInput = currentInput.normalized;
@@ -156,6 +177,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementDirection != Vector3.zero && CanMoveToPosition(movementDirection))
         {
+            // Set rotation before starting movement
+            SetFacingDirection(movementDirection);
             StartMovement(movementDirection);
         }
     }
@@ -181,13 +204,50 @@ public class PlayerMovement : MonoBehaviour
         return movementDirection.normalized * gridSize;
     }
 
+    private void SetFacingDirection(Vector3 movementDirection)
+    {
+        if (visualTransform == null) return;
+
+        // Normalize the movement direction
+        Vector3 lookDirection = movementDirection.normalized;
+        
+        // Don't rotate if we're already facing that direction
+        if (Vector3.Dot(currentFacingDirection, lookDirection) > 0.99f)
+            return;
+
+        currentFacingDirection = lookDirection;
+        
+        // Calculate target rotation
+        targetRotation = Quaternion.LookRotation(lookDirection);
+        startRotation = visualTransform.rotation;
+        isRotating = true;
+    }
+
+    private void UpdateRotation()
+    {
+        if (visualTransform == null) return;
+
+        // Smoothly interpolate rotation
+        visualTransform.rotation = Quaternion.Slerp(
+            visualTransform.rotation, 
+            targetRotation, 
+            rotationSpeed * Time.deltaTime
+        );
+
+        // Check if rotation is complete
+        if (Quaternion.Angle(visualTransform.rotation, targetRotation) < 0.1f)
+        {
+            visualTransform.rotation = targetRotation;
+            isRotating = false;
+        }
+    }
+
     private bool CanMoveToPosition(Vector3 direction)
     {
         Vector3 targetPos = transform.position + direction;
 
         if (playerCollider == null)
         {
-            //Debug.LogWarning("PlayerMovement: No collider assigned, movement allowed by default.");
             return true;
         }
 
@@ -201,17 +261,15 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.BoxCast(raycastStart, halfExtents, direction.normalized,
             out hit, Quaternion.identity, gridSize, obstacleLayer))
         {
-            //Debug.Log($"Cannot move: Obstacle detected - {hit.collider.name}");
             return false;
         }
 
-
         RaycastHit rayHit;
 
-        if(Physics.Raycast(raycastStart,direction.normalized,out rayHit, gridSize, allMask, QueryTriggerInteraction.Collide))
+        if (Physics.Raycast(raycastStart, direction.normalized, out rayHit, gridSize, allMask, QueryTriggerInteraction.Collide))
         {
-            if(rayHit.collider.gameObject.TryGetComponent<InteractableBlock>(out InteractableBlock block))
-            return TryInteractWithBlock(direction, targetPos, block);
+            if (rayHit.collider.gameObject.TryGetComponent<InteractableBlock>(out InteractableBlock block))
+                return TryInteractWithBlock(direction, targetPos, block);
         }
 
         return true;
@@ -219,6 +277,7 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask allMask;
     public PlayerMask playerMask;
+    
     private bool TryInteractWithBlock(Vector3 direction, Vector3 playerTargetPos, InteractableBlock blockObject)
     {
         // Create interaction data
@@ -232,15 +291,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Ask the block if the player can move
         bool canMove = blockObject.CanPlayerMoveHere(interactionData);
-
-        if (canMove)
-        {
-            //Debug.Log($"Block {blockObject.name} allows movement");
-        }
-        else
-        {
-            //Debug.Log($"Block {blockObject.name} blocks movement");
-        }
 
         return canMove;
     }
@@ -313,6 +363,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Public method to manually set facing direction (useful for cutscenes, etc.)
+    public void SetFacing(Vector3 direction)
+    {
+        if (visualTransform == null || direction.magnitude == 0) return;
+        
+        direction = direction.normalized;
+        currentFacingDirection = direction;
+        targetRotation = Quaternion.LookRotation(direction);
+        visualTransform.rotation = targetRotation;
+        isRotating = false; // Instantly face the direction
+    }
+
+    // Get current facing direction
+    public Vector3 GetFacingDirection()
+    {
+        return currentFacingDirection;
+    }
+
     private void OnDestroy()
     {
         if (moveAction != null)
@@ -333,11 +401,18 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(playerCollider.bounds.center, playerCollider.bounds.size);
 
-            if (Application.isPlaying && isMoving)
+            if (Application.isPlaying)
             {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawLine(startPosition, targetPosition);
-                Gizmos.DrawWireSphere(targetPosition, 0.2f);
+                // Draw facing direction
+                Gizmos.color = Color.blue;
+                Gizmos.DrawRay(transform.position, currentFacingDirection * 1.5f);
+
+                if (isMoving)
+                {
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawLine(startPosition, targetPosition);
+                    Gizmos.DrawWireSphere(targetPosition, 0.2f);
+                }
             }
         }
     }
