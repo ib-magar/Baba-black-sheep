@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Animator))]
 public class GuardSimple : MonoBehaviour
 {
     // Define enum inside the class
@@ -15,7 +14,7 @@ public class GuardSimple : MonoBehaviour
     [SerializeField] private float stopDistance = 0.1f;
     [SerializeField] private float faceAngle = 2f;
     
-    private Animator animator;
+    public Animator animator;
     private int currentWaypoint = 0;
     private State currentState = State.Waiting;
     
@@ -23,7 +22,6 @@ public class GuardSimple : MonoBehaviour
     
     private void Start()
     {
-        animator = GetComponent<Animator>();
         
         if (waypoints == null || waypoints.Length == 0)
         {
