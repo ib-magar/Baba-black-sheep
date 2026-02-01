@@ -88,6 +88,7 @@ public class MaskVisualController : MonoBehaviour
         }
     }
 
+  
     private void OnMaskAdded(MaskType maskType)
     {
         UpdateVisuals();

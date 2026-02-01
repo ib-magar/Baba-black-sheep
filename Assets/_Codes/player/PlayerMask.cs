@@ -45,7 +45,10 @@ public class PlayerMask : MonoBehaviour
     {
         InitializeMaskStack();
     }
-
+    public List<MaskType> GetActiveMaskVisuals()
+    {
+        return maskStack;
+    }
     private void InitializeMaskStack()
     {
         maskStack.Clear();
@@ -68,7 +71,10 @@ public class PlayerMask : MonoBehaviour
         UpdateDebugInfo();
         // Don't invoke events on initialization
     }
-
+    public List<MaskType> GetMaskStack()
+    {
+        return new List<MaskType>(maskStack);
+    }
     [Button("Add Mask", ButtonSizes.Medium)]
     [HorizontalGroup("MaskOperations")]
     public bool AddMask(MaskType maskToAdd)
@@ -222,11 +228,7 @@ public class PlayerMask : MonoBehaviour
     {
         return maskStack.Count;
     }
-
-    public List<MaskType> GetMaskStack()
-    {
-        return new List<MaskType>(maskStack);
-    }
+    
 
     private void UpdateDebugInfo()
     {

@@ -82,10 +82,7 @@ public class Trigger : MonoBehaviour
                 DeactivateTrigger();
             }
         }
-        
-        
     }
-
     public bool checkColliders()
     {
         if (Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, .5f, triggerLayers,
@@ -104,7 +101,6 @@ public class Trigger : MonoBehaviour
         // Invoke the activation event
         OnTriggerActivated?.Invoke();
     }
-
     private void DeactivateTrigger()
     {
         if (!isPressed) return;

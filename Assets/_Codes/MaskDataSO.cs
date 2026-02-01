@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MaskData", menuName = "Mask System/Mask Data")]
@@ -63,6 +64,21 @@ public class MaskDataSO : ScriptableObject
     {
         return maskType != MaskType.Default && GetPrefab(maskType) != null;
     }
+
+    public MaskMatches[] Matches;
+
+    public bool MaskMatch(MaskType current, MaskType tocheckmaskType)
+    {
+        foreach (var match in Matches)
+        {
+            if (current == match.mask)
+            {
+                if (match.matches.Contains(tocheckmaskType))
+                    return true;
+            }
+        }
+        return false;
+    }
 }
 
 [Serializable]
@@ -72,4 +88,11 @@ public struct MaskDefinition
     public string displayName;
     public GameObject prefab;
     public GameObject maskItem;
+}
+
+[System.Serializable]
+public struct MaskMatches
+{
+    public MaskType mask;
+    public MaskType[] matches;
 }

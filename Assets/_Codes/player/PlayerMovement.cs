@@ -208,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
 
         RaycastHit rayHit;
 
-        if(Physics.Raycast(raycastStart,direction.normalized,out rayHit, gridSize))
+        if(Physics.Raycast(raycastStart,direction.normalized,out rayHit, gridSize, allMask, QueryTriggerInteraction.Collide))
         {
             if(rayHit.collider.gameObject.TryGetComponent<InteractableBlock>(out InteractableBlock block))
             return TryInteractWithBlock(direction, targetPos, block);
@@ -217,6 +217,8 @@ public class PlayerMovement : MonoBehaviour
         return true;
     }
 
+    public LayerMask allMask;
+    public PlayerMask playerMask;
     private bool TryInteractWithBlock(Vector3 direction, Vector3 playerTargetPos, InteractableBlock blockObject)
     {
         // Create interaction data
@@ -224,7 +226,8 @@ public class PlayerMovement : MonoBehaviour
             direction,
             transform.position,
             playerTargetPos,
-            gameObject
+            gameObject,
+            playerMask.GetCurrentMask()
         );
 
         // Ask the block if the player can move
