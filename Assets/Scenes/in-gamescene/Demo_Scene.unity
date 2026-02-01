@@ -3862,11 +3862,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 329549cd243ed134583eda4b6d5d52d0, type: 3}
   m_PrefabInstance: {fileID: 311148067}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &312020928 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1419250641214082983, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
-  m_PrefabInstance: {fileID: 9000173990627667124}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &312040731
 GameObject:
   m_ObjectHideFlags: 0
@@ -23605,11 +23600,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 760dfb741dc2e724ea94bd8e10b097e2, type: 3}
   m_PrefabInstance: {fileID: 1871898233}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1884421022 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6064764118817591616, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
-  m_PrefabInstance: {fileID: 9000173990627667124}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1892692733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27112,6 +27102,26 @@ PrefabInstance:
       propertyPath: maskVisualController
       value: 
       objectReference: {fileID: 370451709}
+    - target: {fileID: 3074952263852753166, guid: f3493a743c9792247b91b0547397da38, type: 3}
+      propertyPath: initialMasks.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074952263852753166, guid: f3493a743c9792247b91b0547397da38, type: 3}
+      propertyPath: 'initialMasks.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074952263852753166, guid: f3493a743c9792247b91b0547397da38, type: 3}
+      propertyPath: 'initialMasks.Array.data[1]'
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074952263852753166, guid: f3493a743c9792247b91b0547397da38, type: 3}
+      propertyPath: 'initialMasks.Array.data[2]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074952263852753166, guid: f3493a743c9792247b91b0547397da38, type: 3}
+      propertyPath: 'initialMasks.Array.data[3]'
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5815784350103406339, guid: f3493a743c9792247b91b0547397da38, type: 3}
       propertyPath: dropSpawnOffset.y
       value: 0
@@ -27279,7 +27289,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 195833729543955904, guid: 2788919f1dcbfe24eb84a0c49352e977, type: 3}
       propertyPath: currentMask
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 195833729543955904, guid: 2788919f1dcbfe24eb84a0c49352e977, type: 3}
       propertyPath: leftDoorAxis
@@ -27631,26 +27641,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5238950271646093690, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
-      propertyPath: pauseTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5238950271646093690, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
-      propertyPath: waypoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5238950271646093690, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
-      propertyPath: 'waypoints.Array.data[0]'
-      value: 
-      objectReference: {fileID: 312020928}
-    - target: {fileID: 5238950271646093690, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
-      propertyPath: 'waypoints.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1884421022}
-    - target: {fileID: 5238950271646093690, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
-      propertyPath: 'waypoints.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1884421022}
     - target: {fileID: 8109869969856443731, guid: 75f6f4caca67d9d41b8647c0ab37c5c2, type: 3}
       propertyPath: m_Name
       value: Guard

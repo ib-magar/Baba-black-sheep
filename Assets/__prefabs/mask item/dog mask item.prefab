@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3271023543890616485}
   - component: {fileID: 6599558153826382039}
   m_Layer: 0
-  m_Name: mask_item_4
+  m_Name: dog mask item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
