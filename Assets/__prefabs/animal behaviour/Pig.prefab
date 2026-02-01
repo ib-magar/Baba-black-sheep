@@ -136,6 +136,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4630108976532483900}
     m_Modifications:
+    - target: {fileID: 3701479224697077141, guid: 3db1ea137c1502d448c99c088a28a28e, type: 3}
+      propertyPath: diePartice
+      value: 
+      objectReference: {fileID: 7183954015559465847, guid: 2536fa06b746b6e429cb59c9d3cd69a7, type: 3}
     - target: {fileID: 7282776727670043677, guid: 3db1ea137c1502d448c99c088a28a28e, type: 3}
       propertyPath: m_Name
       value: Pig
