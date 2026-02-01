@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        Physics.queriesHitTriggers = true;
         playerInput = GetComponent<PlayerInput>();
         if (playerInput == null)
         {
@@ -124,8 +125,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMovementPerformed(InputAction.CallbackContext context)
     {
         currentInput = context.ReadValue<Vector2>();
-
-        if (currentInput.magnitude > inputDeadzone)
+ if (currentInput.magnitude > inputDeadzone)
         {
             inputActive = true;
             lastValidInput = currentInput.normalized;
@@ -187,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerCollider == null)
         {
-            Debug.LogWarning("PlayerMovement: No collider assigned, movement allowed by default.");
+            //Debug.LogWarning("PlayerMovement: No collider assigned, movement allowed by default.");
             return true;
         }
 
@@ -201,33 +201,24 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.BoxCast(raycastStart, halfExtents, direction.normalized,
             out hit, Quaternion.identity, gridSize, obstacleLayer))
         {
-            Debug.Log($"Cannot move: Obstacle detected - {hit.collider.name}");
+            //Debug.Log($"Cannot move: Obstacle detected - {hit.collider.name}");
             return false;
         }
 
 
         RaycastHit rayHit;
 
-        if(Physics.Raycast(raycastStart,direction.normalized,out rayHit, gridSize))
+        if(Physics.Raycast(raycastStart,direction.normalized,out rayHit, gridSize, allMask, QueryTriggerInteraction.Collide))
         {
             if(rayHit.collider.gameObject.TryGetComponent<InteractableBlock>(out InteractableBlock block))
             return TryInteractWithBlock(direction, targetPos, block);
         }
 
-      /*  // Check for blocks
-        RaycastHit blockHit;
-        if (Physics.BoxCast(raycastStart, halfExtents, direction.normalized,
-            out blockHit, Quaternion.identity, gridSize))
-        {
-            Debug.Log($"Block detected: {blockHit.collider.name}");
-
-            // Try to interact with the block
-            return TryInteractWithBlock(direction, targetPos, blockHit.collider.gameObject);
-        }
-*/
         return true;
     }
 
+    public LayerMask allMask;
+    public PlayerMask playerMask;
     private bool TryInteractWithBlock(Vector3 direction, Vector3 playerTargetPos, InteractableBlock blockObject)
     {
         // Create interaction data
@@ -235,7 +226,8 @@ public class PlayerMovement : MonoBehaviour
             direction,
             transform.position,
             playerTargetPos,
-            gameObject
+            gameObject,
+            playerMask.GetCurrentMask()
         );
 
         // Ask the block if the player can move
@@ -243,11 +235,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (canMove)
         {
-            Debug.Log($"Block {blockObject.name} allows movement");
+            //Debug.Log($"Block {blockObject.name} allows movement");
         }
         else
         {
-            Debug.Log($"Block {blockObject.name} blocks movement");
+            //Debug.Log($"Block {blockObject.name} blocks movement");
         }
 
         return canMove;

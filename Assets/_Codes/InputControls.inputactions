@@ -16,16 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "5bcbcedc-1508-4c2c-b40d-05b24528da53",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Hold(duration=0.005)",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Select",
+                    "name": "remove",
                     "type": "Button",
                     "id": "1a1c3ae8-b309-4549-aa1a-162934ee91f7",
                     "expectedControlType": "",
@@ -103,34 +94,12 @@
                 },
                 {
                     "name": "",
-                    "id": "9f97610e-56e0-4280-813b-0179126d0f8f",
-                    "path": "<Keyboard>/e",
-                    "interactions": "Hold(duration=0.005)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f3cccee5-1e46-46a1-9a2f-d94281df993a",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "Hold(duration=0.005)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "31d2882b-3684-45d3-abf9-d1485fa1d8a4",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Select",
+                    "action": "remove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -141,7 +110,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Select",
+                    "action": "remove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

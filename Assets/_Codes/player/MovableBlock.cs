@@ -32,7 +32,7 @@ public class MovableBlock : InteractableBlock
         blockCollider = GetComponent<Collider>();
         if (blockCollider == null)
         {
-            Debug.LogError($"MovableBlock {name}: No collider found!");
+            //Debug.LogError($"MovableBlock {name}: No collider found!");
         }
 
         // Setup visual transform
@@ -46,7 +46,7 @@ public class MovableBlock : InteractableBlock
 
     public override bool CanPlayerMoveHere(InteractionData interactionData)
     {
-        Debug.Log($"MovableBlock {name} checking if player can move to {interactionData.playerTargetPosition}");
+        //Debug.Log($"MovableBlock {name} checking if player can move to {interactionData.playerTargetPosition}");
 
         // Check if this block can move in the given direction
         bool canBlockMove = CanBlockMoveTo(interactionData.direction);
@@ -71,11 +71,11 @@ public class MovableBlock : InteractableBlock
 
         if (isTargetPositionOccupied)
         {
-            Debug.Log($"MovableBlock {name}: Target position occupied, cannot move");
+            //Debug.Log($"MovableBlock {name}: Target position occupied, cannot move");
             return false;
         }
 
-        Debug.Log($"MovableBlock {name}: Target position clear, can move");
+        //Debug.Log($"MovableBlock {name}: Target position clear, can move");
         return true;
     }
 
@@ -116,7 +116,7 @@ public class MovableBlock : InteractableBlock
         isMoving = true;
         moveTimer = 0f;
 
-        Debug.Log($"Moving block from {startPosition} to {targetPosition}");
+        //Debug.Log($"Moving block from {startPosition} to {targetPosition}");
     }
 
     private void Update()
@@ -160,7 +160,7 @@ public class MovableBlock : InteractableBlock
 
     private void OnMovementComplete()
     {
-        Debug.Log($"MovableBlock {name} movement complete");
+        //Debug.Log($"MovableBlock {name} movement complete");
     }
 
     private float EaseInOutCubic(float t)

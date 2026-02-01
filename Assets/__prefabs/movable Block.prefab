@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 1
-  moveDuration: 0.5
+  moveDuration: 0.3
   visualTransform: {fileID: 1815336655315940310}
   jumpHeight: 0.3
   collisionLayers:
