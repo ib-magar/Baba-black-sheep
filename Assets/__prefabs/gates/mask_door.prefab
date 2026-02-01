@@ -1228,7 +1228,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.76, y: 1, z: 0.3}
+  m_Size: {x: 1.22, y: 1, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2018051655310759511
 Rigidbody:
@@ -1272,7 +1272,72 @@ MonoBehaviour:
   MaskDataSO: {fileID: 11400000, guid: 2040db8faa7bb3f4d91c2ca53f2b49a5, type: 2}
   currentMask: 3
   maskObjectparent: {fileID: 1598828490500097597}
+  leftDoorAxis: {fileID: 0}
+  rightDoorAxis: {fileID: 0}
+  openAngle: 90
+  closeAngle: 0
+  openDuration: 0.5
+  stayOpenDuration: 1.5
+  closeDuration: 0.5
+  openCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  closeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  closeAutomatically: 1
   onDoorUnlock:
+    m_PersistentCalls:
+      m_Calls: []
+  onDoorOpenStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onDoorCloseStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onDoorAnimationComplete:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &8789404173064202443

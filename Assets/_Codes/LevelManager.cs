@@ -26,12 +26,12 @@ public class LevelManager : MonoBehaviour
         int nextSceneCount = currentScene++;
         currentScene%= totalScenes;
 
-        StartCoroutine((LoadSceneWithDelay(currentScene)));
+        StartCoroutine((LoadSceneWithDelay(currentScene, sceneLoadDelay)));
     }
 
-        IEnumerator LoadSceneWithDelay(int scene)
+        IEnumerator LoadSceneWithDelay(int scene, float delay)
         {
-            yield return new WaitForSeconds(sceneLoadDelay);
+            yield return new WaitForSeconds(delay);
             SceneManager.LoadScene(scene);
         }
     private void OnDestroy()
@@ -41,6 +41,6 @@ public class LevelManager : MonoBehaviour
 
     public void GotfuckedUp()
     {
-        StartCoroutine((LoadSceneWithDelay(SceneManager.GetActiveScene().buildIndex)));
+        StartCoroutine((LoadSceneWithDelay(SceneManager.GetActiveScene().buildIndex,.2f)));
     }
 }
