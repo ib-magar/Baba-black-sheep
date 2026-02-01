@@ -239,7 +239,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.8, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &61078797115574527
 MonoBehaviour:
@@ -327,6 +327,10 @@ MonoBehaviour:
   inputDeadzone: 0.1
   playerCollider: {fileID: 125894372525474975}
   visualTransform: {fileID: 2008589232292385117}
+  allMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerMask: {fileID: 0}
 --- !u!54 &3717214304405762570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -368,6 +372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maskStack: 
   initialMasks: 000000000200000003000000
+  dropOffset: {x: 0, y: 0.5, z: 1}
+  maskVisualController: {fileID: 0}
   currentTopMask: 0
   maskCount: 0
   debugAddMask: 1
@@ -390,4 +396,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0.35, z: 0}
   scaleIncrement: 0.1
   maxScale: 2
+  maintainVisualScaleOnDrop: 1
+  dropSpawnOffset: {x: 0, y: 0.5, z: 1}
+  dropVisualLocalOffset: {x: 0, y: 0, z: 0}
   currentVisualStack: 
