@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2a7c7aa1c761f43a563861325a58f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maskType: 2
+  maskType: 7
   orderIndex: 0
   visualLocalPosition: {x: 0, y: 0, z: 0}
   visualLocalScale: {x: 0, y: 0, z: 0}
