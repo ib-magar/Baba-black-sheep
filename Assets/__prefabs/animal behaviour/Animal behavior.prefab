@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6336722416783718350}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000028461216}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -160,7 +160,7 @@ Transform:
   - {fileID: 1125244196138148171}
   - {fileID: 4061904081999990340}
   m_Father: {fileID: 4630108976532483900}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &6500008887393201322
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,9 +318,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7282776727670043677, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3211831412868408168}
-    - targetCorrespondingSourceObject: {fileID: 7282776727670043677, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7811523145740190843}
   m_SourcePrefab: {fileID: 100100000, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
 --- !u!1 &3175359450877118775 stripped
@@ -328,28 +325,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7282776727670043677, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
   m_PrefabInstance: {fileID: 5260409156610096426}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3211831412868408168
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3175359450877118775}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7811523145740190843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,8 +353,14 @@ MonoBehaviour:
   pathColor: {r: 0, g: 1, b: 0, a: 1}
   pointColor: {r: 1, g: 0, b: 0, a: 1}
   pointSize: 0.3
+  animator: {fileID: 7262905352217199430}
 --- !u!4 &4246034423647162080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8353134482213385162, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
+  m_PrefabInstance: {fileID: 5260409156610096426}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7262905352217199430 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3299941906641092204, guid: f9a18d5ecfd7bf548acd6b09a109fb5f, type: 3}
   m_PrefabInstance: {fileID: 5260409156610096426}
   m_PrefabAsset: {fileID: 0}

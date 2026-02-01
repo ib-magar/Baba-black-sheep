@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Animator))]
 public class AnimalBehavior : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -20,7 +19,7 @@ public class AnimalBehavior : MonoBehaviour
     [SerializeField] private Color pointColor = Color.red;
     [SerializeField] private float pointSize = 0.3f;
     
-    private Animator animator;
+    public Animator animator;
     private int currentPointIndex = 0;
     private bool isWalking = false;
     private bool isWaiting = false;
@@ -31,8 +30,6 @@ public class AnimalBehavior : MonoBehaviour
     
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        
         if (walkingPoints == null || walkingPoints.Length == 0)
         {
             Debug.LogError("No walking points assigned to AnimalBehavior!");
