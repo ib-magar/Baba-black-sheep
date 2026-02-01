@@ -19,7 +19,7 @@ public class Animal : InteractableBlock
     }
     public override bool CanPlayerMoveHere(InteractionData interactionData)
     {
-       if(interactionData.currentMask==MaskType.Wolf)
+       //if(interactionData.currentMask==MaskType.Wolf)
         return true;
 
        return false;
