@@ -109,6 +109,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""retry"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e751eda-72bc-49a5-b766-02f429ef15f8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -199,6 +208,28 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""remove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae9843e2-f1d3-45fe-83ba-1eb3b5838596"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""retry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""daca48ef-7315-4884-9125-1d5de7084134"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""retry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -279,6 +310,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_remove = m_Player.FindAction("remove", throwIfNotFound: true);
+        m_Player_retry = m_Player.FindAction("retry", throwIfNotFound: true);
         // Pause
         m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
         m_Pause_Pause = m_Pause.FindAction("Pause", throwIfNotFound: true);
@@ -366,6 +398,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_remove;
+    private readonly InputAction m_Player_retry;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -385,6 +418,10 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/remove".
         /// </summary>
         public InputAction @remove => m_Wrapper.m_Player_remove;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/retry".
+        /// </summary>
+        public InputAction @retry => m_Wrapper.m_Player_retry;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -417,6 +454,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @remove.started += instance.OnRemove;
             @remove.performed += instance.OnRemove;
             @remove.canceled += instance.OnRemove;
+            @retry.started += instance.OnRetry;
+            @retry.performed += instance.OnRetry;
+            @retry.canceled += instance.OnRetry;
         }
 
         /// <summary>
@@ -434,6 +474,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @remove.started -= instance.OnRemove;
             @remove.performed -= instance.OnRemove;
             @remove.canceled -= instance.OnRemove;
+            @retry.started -= instance.OnRetry;
+            @retry.performed -= instance.OnRetry;
+            @retry.canceled -= instance.OnRetry;
         }
 
         /// <summary>
@@ -595,6 +638,13 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRemove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "retry" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRetry(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Pause" which allows adding and removing callbacks.

@@ -2,20 +2,30 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: URPMacGrassBall02
   m_Shader: {fileID: 4800000, guid: bf1b67d8223379749a0a88d47d0a7154, type: 3}
-  m_ShaderKeywords: USE_RT USE_S USE_SC _RTEFFECT_ON
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - USE_PR
+  - USE_RT
+  - USE_S
+  - USE_SC
+  - USE_WC
+  m_InvalidKeywords:
+  - _RTEFFECT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -56,8 +66,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4e1d764fa7e47f34eae88e37253c2542, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 8bbb220d5bd77904b9204bed55f4f245, type: 3}
+        m_Scale: {x: 1, y: 0.44}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -84,8 +94,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SplatMap:
-        m_Texture: {fileID: -3973170717174270421, guid: 9ffdee09e9c0fa14282beaf12403978d,
-          type: 2}
+        m_Texture: {fileID: -3973170717174270421, guid: 9ffdee09e9c0fa14282beaf12403978d, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureA:
@@ -104,6 +113,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -117,10 +127,10 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GrassCut: 0
-    - _GrassSaturation: 4
+    - _GrassSaturation: 5.38
     - _GrassShading: 0
-    - _GrassThinness: 1.79
-    - _GrassThinnessIntersection: 1.72
+    - _GrassThinness: 0.01
+    - _GrassThinnessIntersection: 0.596
     - _Metallic: 0
     - _MinimumNumberStacks: 2
     - _Mode: 0
@@ -146,16 +156,23 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TextureScale: 0.25
-    - _TilingN1: 2.3
+    - _TilingN1: 4.47
     - _TilingN2: 0.05
     - _TilingN3: 0.4
     - _UVSec: 0
-    - _UsePR: 0
+    - _UseAmbientLight: 0
+    - _UsePR: 1
     - _UseRT: 1
     - _UseShadow: 1
     - _UseShadowCast: 1
+    - _UseTP: 0
+    - _UseVP: 0
+    - _UseVR: 0
+    - _UseWC: 1
     - _WindForce: 0.3
     - _WindMovement: 0.2
+    - _WorldRotation: 0
+    - _WorldScale: 10
     - _ZWrite: 1
     - __NumberOfStacks: 17
     m_Colors:
@@ -167,3 +184,5 @@ Material:
     - _ProjectedShadowColor: {r: 0.45098037, g: 0.23375347, b: 0.04313723, a: 1}
     - _RimColor: {r: 0.277, g: 0.25819692, b: 0.1355532, a: 1}
     - _SelfShadowColor: {r: 0.28399998, g: 0.27240813, b: 0.06665304, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
